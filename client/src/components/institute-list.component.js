@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
+
+
+
 const Institute = props =>(
     <tr>
         <td>{props.institute.institute_name}</td>
@@ -16,6 +19,8 @@ const Institute = props =>(
         </td>
     </tr>
 )
+
+
 
 
 export default class InstitutesList extends Component{
@@ -59,14 +64,21 @@ export default class InstitutesList extends Component{
 
         });
     }
-   
-   
+    
+    
     render(){
-    return (
 
-            <div>
+      
+
+    return (
+          
+        
+      
+         <div >
                 <h3>Institutes List</h3>
-                <table className="table table-striped" style={{marginTop:20}}>
+
+             
+                <table id="example" class="table table-bordered table-dark table-hover" style={{marginTop:20}} cellSpacing="0" width="100%" >
                     <thead>
                         <tr>
 
@@ -84,10 +96,17 @@ export default class InstitutesList extends Component{
                         {this.instituteList()}
                     </tbody>
 
+                   
+                    
+
                 </table>
+   
+
             </div>
+            
 
         )
     }
+    
 
 }
