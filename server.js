@@ -2,25 +2,18 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const path = require('path');
-require('dotenv').config()
+
 const mongoose = require('mongoose');
 const instituteRoutes = express.Router();
 
 const PORT = process.env.PORT || 4000;
-
 
 let Institute = require('./institute.model');
  
 app.use(cors());
 
 app.use(bodyParser.json());
-
-//const MONGODB_URI='mongodb+srv://arvindp_1997:tLfsld2Zk99keqdm@cluster0-ujara.mongodb.net/megaexams?retryWrites=true&w=majority';
-
-//process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/megaexams'
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/megaexams' , { 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/megaexams', { 
     useNewUrlParser: true ,
     useUnifiedTopology: true 
 });
@@ -98,13 +91,7 @@ instituteRoutes.route('/update.:id').post(function(req,res){
 app.use('/institute', instituteRoutes);
 
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('client/build'));
-
-   /* app.get('*',(req,res) => {
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-
-    })
-  */
+    app.use(express.static('../frontend/build'));
 }
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
