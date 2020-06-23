@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const mongoose = require('mongoose');
 const instituteRoutes = express.Router();
@@ -90,9 +91,11 @@ instituteRoutes.route('/update.:id').post(function(req,res){
 
 app.use('/institute', instituteRoutes);
 
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('../frontend/build'));
-}
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });
